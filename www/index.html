@@ -20,10 +20,11 @@
 
 <body style="background-color:#efd0cc">
     <img id="movingImage" src="" />
-    <div class="row" id="dino-container">
-        <div id="canvasDiv"></div>
+    <div id="canvasDiv" class="grid-row-upper" id="dino-container">
+        <div class="debug"></div>
     </div>
-    <div class="grid-row debug" style="background-color:#ff897c">
+    <div class="grid-row-lower debug">
+        <div id="test" name="test" />
         <div class="container-fluid">
             <div class="row" id="food-container">
                 <ul class="nav nav-tabs">
@@ -70,14 +71,14 @@
             border-style: solid;
             border-width: 1px;
         }
-        .grid-row {
+        .grid-row-upper {
             width: 100%;
-            height: 50%;
+            height: 60%;
         }
-        .grid-row p {
-            width: 50%;
-            height: 100%;
-            float: left;
+        .grid-row-lower {
+            width: 100%;
+            height: 40%;
+            background-color: #ff897c;
         }
         #movingImage {
             position: absolute;

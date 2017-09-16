@@ -1,7 +1,7 @@
 ﻿var canvas;
 var context;
 var images = {};
-var totalResources = 15; // TODO: think
+var totalResources = 24; // TODO: think
 var numResourcesLoaded = 0;
 var fps = 30;
 var fpsInterval = setInterval(updateFPS, 1000);
@@ -72,11 +72,15 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight) {
     clearCanvas();
     context.fillText("loading...", 40, 140);
 
+    loadImage("background1");
+    loadImage("background2");
     loadImage("body");
     loadImage("body_fat1");
     loadImage("body_fat2");
     loadImage("body_fat3");
     loadImage("body_fat4");
+    loadImage("sixpack1");
+    loadImage("sixpack2");
     loadImage("head");
     loadImage("head_half");
     loadImage("head_sad1");
@@ -87,6 +91,11 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight) {
     loadImage("right_foot");
     loadImage("right_hand");
     loadImage("tail");
+    loadImage("vis_fat");
+    loadImage("vis_sugar");
+    loadImage("vis_vitamine");
+    loadImage("vis_water");
+    loadImage("speechbubble");
 }
 
 function loadImage(name) {
@@ -209,14 +218,14 @@ function updateMouthState() {
         return;
     }
 
-    var x = canvas.width * 0.5;
-    var y = canvas.height * 0.25;
+    var x = canvas.width * 0.30;
+    var y = canvas.height * 0.30;
     var pointerX = pointerPositionX;
     var pointerY = pointerPositionY;
     var dx = pointerX - x;
     var dy = pointerY - y;
 
-    var threshold = 80;
+    var threshold = 90;
     var dist = Math.sqrt(dx * dx + dy * dy);
     if (dist < threshold && mouthState == 0) {
         mouthState = 1;
@@ -282,13 +291,13 @@ function drawShadow() {
     else if (fatness == 3) width = 390;
     else width = 420;
 
-    drawEllipse(canvas.width / 2 - 5 * ratio, 359 * ratio, width * ratio, 50 * ratio);
+    drawEllipse(canvas.width / 2.6, 390 * ratio, width * ratio, 50 * ratio);
 }
 
 function drawImageWithOffsetAndAngle(img, offsetX, offsetY, angle, centerX, centerY) {
     var hRatio = canvas.width / img.width;
     var vRatio = canvas.height / img.height;
-    var ratio = Math.min(hRatio, vRatio);
+    ratio = Math.min(hRatio, vRatio);
     var centerShift_x = (canvas.width - img.width * ratio) / 2 + offsetX * ratio;
     var centerShift_y = (canvas.height - img.height * ratio) / 2 + offsetY * ratio;
     var cx = centerShift_x + centerX * ratio;
@@ -351,6 +360,54 @@ function drawTail() {
     drawImageWithAngle(img, tailRotation, 243, 332);
 }
 
+function drawIcon(name, percent, number, bad) {
+    var img = images[name];
+
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    ratio = Math.min(hRatio, vRatio);
+
+    context.beginPath();
+    context.rect(canvas.width - img.width * ratio + 2, ratio * (number * 103 + 100 * (1 - percent)), img.width * ratio - 5, ratio * 100 * percent);
+    if (bad) {
+        if (percent > 0.66) context.fillStyle = "red";
+        else if (percent > 0.33) context.fillStyle = "orange";
+        else context.fillStyle = "green";
+    } else {
+        if (percent > 0.66) context.fillStyle = "green";
+        else if (percent > 0.33) context.fillStyle = "orange";
+        else context.fillStyle = "red";
+    }
+    context.fill();
+    context.closePath();
+
+    context.drawImage(img, 0, 0, img.width, img.height, canvas.width - img.width * ratio, 0, img.width * ratio, img.height * ratio);
+}
+
+function drawIcons() {
+    var fat_percent = 0.8;
+    var sugar_percent = 0.3;
+    var vitamine_percent = 0.5;
+    var water_percent = 0.2; // TODO!
+
+    var img = images["background1"];
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    ratio = Math.min(hRatio, vRatio);
+    context.drawImage(img, 0, 0, img.width, img.height, canvas.width - img.width * ratio, 0, img.width * ratio, img.height * ratio);
+
+    drawIcon("vis_vitamine", vitamine_percent, 0, false);
+    drawIcon("vis_sugar", sugar_percent, 1, true);
+    drawIcon("vis_fat", fat_percent, 2, true)
+    drawIcon("vis_water", water_percent, 3, false);
+
+    img = images["background2"];
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    ratio = Math.min(hRatio, vRatio);
+    context.drawImage(img, 0, 0, img.width, img.height, canvas.width - img.width * ratio, 0, img.width * ratio, img.height * ratio);
+}
+
 function redraw() {
 
     updateHeadBobbing();
@@ -359,15 +416,15 @@ function redraw() {
     updateTailRotation();
     updateMouthState();
 
-
     clearCanvas();
 
+    drawIcons();
     drawShadow();
     drawTail();
     drawBody();
     drawHands();
     drawFeet();
-    drawHead();   
+    drawHead();
 }
 
-prepareCanvas(document.getElementById("canvasDiv"), $(window).width(), $(window).height() / 2);
+prepareCanvas(document.getElementById("canvasDiv"), $(window).width(), $(window).height() / 5 * 3);

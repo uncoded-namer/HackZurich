@@ -8,30 +8,47 @@ startY = 0;
 pointerPositionX = 0;
 pointerPositionY = 0;
 selectedFoodName = "";
+var i = 0;
+
+var pointerEventToXY = function (e) {
+    var out = { x: 0, y: 0 };
+    if (e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel') {
+        var touch = e.touches[0] || e.changedTouches[0];
+        out.x = touch.pageX;
+        out.y = touch.pageY;
+    } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover' || e.type == 'mouseout' || e.type == 'mouseenter' || e.type == 'mouseleave') {
+        out.x = e.pageX;
+        out.y = e.pageY;
+    }
+    return out;
+};
 
 (function () {
     "use strict";
 
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
-    function movePointer(e) {
+    function movePointer(event) {
+        event.preventDefault();
         if (move) {
-            $("#movingImage").css({ left: e.pageX, top: e.pageY });
-            pointerPositionX = e.pageX;
-            pointerPositionY = e.pageY;
+            var position = pointerEventToXY(event);
+            pointerPositionX = position.x;
+            pointerPositionY = position.y;
+            $("#movingImage").css({ left: pointerPositionX, top: pointerPositionY });
         }
     }
 
     function startMovePointer(event) {
+        event.preventDefault();
+        event.stopPropagation();
         move = true;
         selectedFoodName = $(this).children("img").get(0).parentElement.getAttribute("name"); // TODO: what
         var imageUrl = $(this).children("img").get(0).getAttribute("src");
-        $("#movingImage").css({ left: event.pageX, top: event.pageY });
+        var position = pointerEventToXY(event);
+        pointerPositionX = position.x;
+        pointerPositionY = position.y;
+        $("#movingImage").css({ left: pointerPositionX, top: pointerPositionY });
         $("#movingImage").attr("src", imageUrl);
-        pointerPositionX = event.pageX;
-        pointerPositionY = event.pageY;
-        event.preventDefault();
-        event.stopPropagation();
     }
 
     function endMovePointer(event) {
@@ -48,14 +65,13 @@ selectedFoodName = "";
         document.addEventListener('resume', onResume.bind(this), false);
 
         var isTouchSupport = 'ontouchstart' in window;
-        var startEvent = isTouchSupport ? 'ontouchstart' : 'mousedown';
+        var startEvent = isTouchSupport ? 'touchstart' : 'mousedown';
         var moveEvent = isTouchSupport ? 'touchmove' : 'mousemove';
-        var endEvent = isTouchSupport ? 'touched' : 'mouseup';
+        var endEvent = isTouchSupport ? 'touchend' : 'mouseup';
 
+        console.log(isTouchSupport);
+        
         document.addEventListener(moveEvent, movePointer, false);
-        //$(".food-button").addEventListener(startEvent, startMovePointer, false);
-        //$("body").addEventListener(endEvent, endMovePointer, false);
-        //$(document).mousemove(movePointer);
         $(".food-button").on(startEvent, startMovePointer);
         $("body").on(endEvent, endMovePointer);
     }

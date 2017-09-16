@@ -11,6 +11,8 @@
   <content src="index.html" />
   <access origin="*" />
   <preference name="SplashScreen" value="screen" />
+  <preference name="DisallowOverscroll" value="true" />
+  <preference name="webviewbounce" value="false" />
   <preference name="windows-target-version" value="10.0" />
   <!-- Support for Cordova 5.0.0 plugin system -->
   <plugin name="cordova-plugin-whitelist" spec="1.2.2" />
@@ -103,4 +105,6 @@
     <splash src="res/screens/windows/SplashScreen.scale-240.png" width="1152" height="1920" />
     <splash src="res/screens/windows/SplashScreenPhone.scale-240.png" width="1152" height="1920" />
   </platform>
+  <preference name="Orientation" value="portrait" />
+  <preference name="Fullscreen" value="True" />
 </widget>
