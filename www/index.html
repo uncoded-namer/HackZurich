@@ -16,37 +16,38 @@
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <title>//TODO insert title</title>
 </head>
-<body>
-    <div class="grid-row" id="dino-container">
+<body class="debug">
+    <img id="movingImage" src=""/>
+    <div class="grid-row debug" id="dino-container">
         <p>oben links</p>
         <p>oben rechts</p>
     </div>
-    <div class="grid-row">
+    <div class="grid-row debug">
         <div class="container-fluid">
             <div class="row" id="food-container">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-                    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-                    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+                    <li class="active"><a data-toggle="tab" href="#fruits"><img src="images/placeholder/button.png"/></a></li>
+                    <li><a data-toggle="tab" href="#vegetables"><img src="images/placeholder/button.png" /></a></li>
+                    <li><a data-toggle="tab" href="#meats"><img src="images/placeholder/button.png" /></a></li>
+                    <li><a data-toggle="tab" href="#fast-food"><img src="images/placeholder/button.png" /></a></li>
                 </ul>
 
                 <div class="tab-content">
-                    <div id="home" class="tab-pane fade in active">
-                        <h3>HOME</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div id="fruits" class="tab-pane fade in active">
+                        <a role="button" class="btn food-button"><img src="images/placeholder/button.png" /></a>
+                        <a role="button" class="btn food-button"><img src="images/placeholder/button.png" /></a>
+                        <a role="button" class="btn food-button"><img src="images/placeholder/button.png" /></a>
                     </div>
-                    <div id="menu1" class="tab-pane fade">
-                        <h3>Menu 1</h3>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <div id="vegetables" class="tab-pane fade">
+                        <p>vegetables</p>
                     </div>
-                    <div id="menu2" class="tab-pane fade">
-                        <h3>Menu 2</h3>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    <div id="meats" class="tab-pane fade">
+                        <p>meat</p>
                     </div>
-                    <div id="menu3" class="tab-pane fade">
-                        <h3>Menu 3</h3>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <div id="fast-food" class="tab-pane fade">
+                        <div class="row">
+                            <p>fast-food</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,18 +61,24 @@
             padding: 0;
             margin: 0;
             height: 100%;
+            border:1px;
         }
-
+        .debug {
+            border-style: solid;
+            border-width: 1px;
+        }
         .grid-row {
             width: 100%;
             height: 50%;
         }
-
-            .grid-row p {
-                width: 50%;
-                height: 100%;
-                float: left;
-            }
+        .grid-row p {
+            width: 50%;
+            height: 100%;
+            float: left;
+        }
+        #movingImage {
+            position: absolute;
+        }
     </style>
 </body>
 </html>
