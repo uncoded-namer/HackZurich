@@ -421,7 +421,7 @@ function drawIcon(name, percent, number, bad) {
     ratio = Math.min(hRatio, vRatio);
 
     context.beginPath();
-    context.rect(canvas.width - img.width * ratio + 2, ratio * (number * 103 + 100 * (1 - percent)), img.width * ratio - 5, ratio * 100 * percent);
+    context.rect(canvas.width - img.width * ratio + 2, ratio * (18+ number * 298 + 298 * (1 - percent)), img.width * ratio - 5, ratio * 298 * percent);
     if (bad) {
         if (percent > 0.66) context.fillStyle = "red";
         else if (percent > 0.33) context.fillStyle = "orange";
