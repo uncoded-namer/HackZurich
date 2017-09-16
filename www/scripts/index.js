@@ -93,10 +93,12 @@ var movingImagePosOffset = 24; // TODO: prettier
         var moveEvent = isTouchSupport ? 'touchmove' : 'mousemove';
         var endEvent = isTouchSupport ? 'touchend' : 'mouseup';
 
+        var size = Math.floor($(window).width() / (2 * 6 + 2));
         Object.keys(categoryMap).forEach(function(key) {
             var category = key;
             var foodsByName = categoryMap[category];
-            $("#category-headers").append("<li><a data-toggle=\"tab\" href=\"#" + category + "\"><img src=\"images/placeholder/button.png\" /></a></li>");
+            console.log(size);
+            $("#category-headers").append("<li><a data-toggle=\"tab\" href=\"#" + category + "\"><img src=\"images/icons/"+ category + ".png\" height=\"" + size + "\" width=\"" + size + "\"/></a></li>");
             $("#category-content").append("<div id=\"" + category + "\" class=\"tab-pane fade\">");
             Object.keys(foodsByName).forEach(function(name) {
                 $("#" + category).append("<a role=\"button\" class=\"btn food-button\" food=\"" + name + "\"><img src=\"images/icons/" + name + ".png\" /></a>");

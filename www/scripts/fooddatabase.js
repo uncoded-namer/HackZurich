@@ -53,7 +53,7 @@ var cookedFish = { "name": "cookedFish", "kcal": 171, "protein": 29.84, "carbohy
 var smokedFish = { "name": "smokedFish", "kcal": 99, "protein": 15.54, "carbohydrates": 0, "sugar": 0, "fat": 3.67, "saturatedFat": 0.79, "fiber": 0, "salt": 666 };
 
 var burger = { "name": "burger", "kcal": 351, "protein": 18.01, "carbohydrates": 35.74, "sugar": 8.79, "fat": 14.81, "saturatedFat": 6.24, "fiber": 1.8, "salt": 785 };
-var pizza = { "name": "pizza", "kcal": 1773, "protein": 71.21, "carbohydrates": 185.24, "sugar": 11.84, "fat": 81.28, "saturatedFat": 32.34, "fiber": 9.4, "salt": 4082 };
+var pizza = { "name": "pizza", "kcal": 782, "protein": 40, "carbohydrates": 79, "sugar": 10, "fat": 33, "saturatedFat": 13, "fiber": 5, "salt": 5000 };
 var fries = { "name": "fries", "kcal": 319, "protein": 3.76, "carbohydrates": 37.53, "sugar": 0.68, "fat": 17.03, "saturatedFat": 4.03, "fiber": 3.5, "salt": 193 };
 var nuggets = { "name": "nuggets", "kcal": 297, "protein": 15.59, "carbohydrates": 16.32, "sugar": 0.88, "fat": 18.82, "saturatedFat": 4.02, "fiber": 0.9, "salt": 574 };
 var butter = { "name": "butter", "kcal": 36, "protein": 0.04, "carbohydrates": 0, "sugar": 0, "fat": 4.06, "saturatedFat": 2.57, "fiber": 0, "salt": 1 };
