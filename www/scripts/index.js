@@ -97,7 +97,6 @@ var movingImagePosOffset = 24; // TODO: prettier
         Object.keys(categoryMap).forEach(function(key) {
             var category = key;
             var foodsByName = categoryMap[category];
-            console.log(size);
             $("#category-headers").append("<li><a data-toggle=\"tab\" href=\"#" + category + "\"><img src=\"images/icons/"+ category + ".png\" height=\"" + size + "\" width=\"" + size + "\"/></a></li>");
             $("#category-content").append("<div id=\"" + category + "\" class=\"tab-pane fade\">");
             Object.keys(foodsByName).forEach(function(name) {

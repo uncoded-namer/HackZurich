@@ -171,7 +171,7 @@ function updateSugarShaking() {
 	
 	sugarShakeValue = (sugarShakeValue + 1);
 	var dtime = sugarShakeValue % sugarShakeDuration;
-    var t = sugarShakeDuration / sugarShakeDuration;
+    var t = dtime / sugarShakeDuration;
 	sugarShakeOffsetX = interpolateValues(sugarShakeStartPositionX, sugarShakeEndPositionX, headBobbingTweening(t));
 	
 	if(sugarShakeValue >= iconShakeDuration) {
@@ -199,7 +199,7 @@ function updateFatShaking() {
 	
 	fatShakeValue = (sugarShakeValue + 1);
 	var dtime = fatShakeValue % fatShakeDuration;
-    var t = fatShakeDuration / fatShakeDuration;
+    var t = dtime / fatShakeDuration;
     fatShakeOffsetX = interpolateValues(fatShakeStartPositionX, fatShakeEndPositionX, headBobbingTweening(t));
 	
 	if(fatShakeValue >= iconShakeDuration) {
@@ -287,15 +287,21 @@ function evaluateFood() {
     vegetables += (categoryName == "vegetables");
     fruits += (categoryName == "fruits");
 	
-	if(sugar - food.suger > recommendedSugar && sugar > recommendedSugar && sugar > 0) {
+	if(sugar - food.sugar > recommendedSugar && sugar > recommendedSugar && food.sugar > 0) {
 		setSugarShaking();	
 	}
 	
-		if(fat - food.fat > recommendedFat && fat > recommendedFat && fat > 0) {
+		if(fat - food.fat > recommendedFat && fat > recommendedFat && food.fat > 0) {
 		setFatShaking();	
 	}
 	
     calculateFatness();
+
+    if ((isThirsty() || needsVegetables()) && energy > recommendedEnergy / 2) {
+        activateSpeechBubble();
+    } else {
+        deactivateSpeechBubble();
+    }
 }
 
 function updateMouthState() {
@@ -309,8 +315,8 @@ function updateMouthState() {
     var isHolding = move;
     if (!isHolding) {
         if (mouthState == 1 || mouthState == 2) {
-            startExcitement();
             evaluateFood();
+            startExcitement();
         }
 
         if (mouthState == 1) mouthState = 0;
@@ -492,7 +498,7 @@ function drawIcon(name, percent, number, bad, offsetX) {
     ratio = Math.min(hRatio, vRatio);
 
     context.beginPath();
-    context.rect(canvas.width - img.width * ratio + 2 + offsetX, ratio * (18+ number * 298 + 298 * (1 - percent)), img.width * ratio - 5, ratio * 298 * percent);
+    context.rect(canvas.width - img.width * ratio + 2, ratio * (18+ number * 298 + 298 * (1 - percent)), img.width * ratio - 5, ratio * 298 * percent);
     if (bad) {
         if (percent > 0.66) context.fillStyle = "red";
         else if (percent > 0.33) context.fillStyle = "orange";
@@ -505,7 +511,7 @@ function drawIcon(name, percent, number, bad, offsetX) {
     context.fill();
     context.closePath();
 
-    context.drawImage(img, 0, 0, img.width, img.height, canvas.width - img.width * ratio, 0, img.width * ratio, img.height * ratio);
+    context.drawImage(img, 0, 0, img.width, img.height, canvas.width - (img.width + offsetX) * ratio, 0, img.width * ratio, img.height * ratio);
 }
 
 function drawIcons() {
@@ -519,7 +525,7 @@ function drawIcons() {
     var vRatio = canvas.height / img.height;
     ratio = Math.min(hRatio, vRatio);
     context.drawImage(img, 0, 0, img.width, img.height, canvas.width - img.width * ratio, 0, img.width * ratio, img.height * ratio);
-
+    
 	updateFatShaking();
 	updateSugarShaking();
 	
@@ -620,14 +626,12 @@ function selectSpeechBubbleTexture() {
 
 }
 
-function checkActivateSpeechBubble() {
-    if ((isThirsty() || needsVegetables()) && Math.random() < 0.001) {
-        isSpeaking = 1;
-        speakDurationCounter = 0;
-        selectSpeechBubbleTexture();
-    }
-
+function activateSpeechBubble() {
+    isSpeaking = 1;
+    speakDurationCounter = 0;
+    selectSpeechBubbleTexture();
 }
+
 
 function deactivateSpeechBubble() {
     isSpeaking = 0;
@@ -636,7 +640,6 @@ function deactivateSpeechBubble() {
 
 function updateSpeechBubble() {
     if (!isSpeaking) {
-        checkActivateSpeechBubble();
         return;
     }
 
