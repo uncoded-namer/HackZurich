@@ -22,7 +22,7 @@ var eggplant = { "name": "eggplant", "kcal": 33, "protein": 0.39, "carbohydrates
 var cauliflower = { "name": "cauliflower", "kcal": 25, "protein": 1.98, "carbohydrates": 5.3, "sugar": 2.4, "fat": 0.1, "saturatedFat": 0.03, "fiber": 2.5, "salt": 30 };
 var brokkoli = { "name": "brokkoli", "kcal": 31, "protein": 2.57, "carbohydrates": 6.04, "sugar": 1.55, "fat": 0.34, "saturatedFat": 0.04, "fiber": 2.4, "salt": 30 };
 var peas = { "name": "peas", "kcal": 117, "protein": 7.86, "carbohydrates": 20.97, "sugar": 8.22, "fat": 0.58, "saturatedFat": 0.1, "fiber": 7.4, "salt": 7 };
-var cucuber = { "name": "cucumber", "kcal": 7, "protein": 0.35, "carbohydrates": 1.3, "sugar": 0.83, "fat": 0.1, "saturatedFat": 0.01, "fiber": 0.4, "salt": 1 };
+var cucumber = { "name": "cucumber", "kcal": 7, "protein": 0.35, "carbohydrates": 1.3, "sugar": 0.83, "fat": 0.1, "saturatedFat": 0.01, "fiber": 0.4, "salt": 1 };
 var carrot = { "name": "carrot", "kcal": 25, "protein": 0.57, "carbohydrates": 5.84, "sugar": 2.77, "fat": 0.15, "saturatedFat": 0.02, "fiber": 1.7, "salt": 42 };
 var corn = { "name": "corn", "kcal": 132, "protein": 4.96, "carbohydrates": 29.29, "sugar": 4.96, "fat": 1.82, "saturatedFat": 0.3, "fiber": 4.2, "salt": 23 };
 var olives = { "name": "olives", "kcal": 27, "protein": 0.21, "carbohydrates": 1.24, "sugar": 0.04, "fat": 2.59, "saturatedFat": 0.34, "fiber": 0.7, "salt": 249 };
@@ -35,7 +35,7 @@ var zucchini = { "name": "zucchini", "kcal": 18, "protein": 1.37, "carbohydrates
 var onion = { "name": "onion", "kcal": 25, "protein": 0.55, "carbohydrates": 6.07, "sugar": 2.57, "fat": 0.05, "saturatedFat": 0.02, "fiber": 0.8, "salt": 2 };
 
 var vegetables = [];
-[aubergine, cauliflower, brokkoli, peas, cucumber, carrot, corn, olives, paprika, mushrooms, salad, spinach, tomato, zucchini, onion]
+[eggplant, cauliflower, brokkoli, peas, cucumber, carrot, corn, olives, paprika, mushrooms, salad, spinach, tomato, zucchini, onion]
     .forEach(function (entry) {
         vegetables[entry.name] = entry;
     });
@@ -84,7 +84,7 @@ var potato = { "name": "potato", "kcal": 149, "protein": 3.58, "carbohydrates": 
 var rice = { "name": "rice", "kcal": 191, "protein": 3.56, "carbohydrates": 41.04, "sugar": 0, "fat": 0.83, "saturatedFat": 0.03, "fiber": 1, "salt": 582 };
 var noodles = { "name": "noodles", "kcal": 220, "protein": 8.06, "carbohydrates": 42.95, "sugar": 0.78, "fat": 1.29, "saturatedFat": 0.25, "fiber": 2.5, "salt": 325 };
 
-var cornProducts = []
+var cornProducts = [];
 [bread, toast, oatmeal, potato, rice, noodles]
     .forEach(function (entry) {
         cornProducts[entry.name] = entry;
