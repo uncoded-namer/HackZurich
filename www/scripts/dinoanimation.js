@@ -106,7 +106,7 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight) {
     loadImage("vis_water");
     loadImage("speechbubble");
     loadImage("speech_water");
-    loadImage("speech_apple");
+    loadImage("speech_carrot");
 }
 
 function loadImage(name) {
@@ -541,18 +541,18 @@ function isThirsty() {
 }
 
 
-function needsApples() {
-    return fruits < recommendedFruits / 2;
+function needsVegetables() {
+    return vegetables < recommendedVegetables / 2;
 }
 
 function selectSpeechBubbleTexture() {
     if (isThirsty()) speakTexture = images["speech_water"];
-    else speakTexture = images["speech_apple"];
+    else speakTexture = images["speech_carrot"];
 
 }
 
 function checkActivateSpeechBubble() {
-    if ((isThirsty() || needsApples()) && Math.random() < 0.001) {
+    if ((isThirsty() || needsVegetables()) && Math.random() < 0.001) {
         isSpeaking = 1;
         speakDurationCounter = 0;
         selectSpeechBubbleTexture();
