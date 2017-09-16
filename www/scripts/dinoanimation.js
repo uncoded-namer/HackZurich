@@ -153,6 +153,65 @@ function updateHeadBobbing() {
     headBobbingOffsetY = interpolateValues(headBobbingStartPositionY, headBobbingEndPositionY, headBobbingTweening(t));
 }
 
+var iconShakeDuration = 30;
+
+
+var isSugarShaking = 0;
+var sugarShakeStartPositionX = -10;
+var sugarShakeEndPositionX = 10;
+var sugarShakeDuration = 5;
+var sugarShakeValue = sugarShakeDuration / 2;
+var sugarShakeOffsetX = 0;
+
+function updateSugarShaking() {
+	if(!isSugarShaking) {
+		sugarShakeOffsetX = 0;
+		return;
+	}
+	
+	sugarShakeValue = (sugarShakeValue + 1);
+	var dtime = sugarShakeValue % sugarShakeDuration;
+    var t = sugarShakeDuration / sugarShakeDuration;
+	sugarShakeOffsetX = interpolateValues(sugarShakeStartPositionX, sugarShakeEndPositionX, headBobbingTweening(t));
+	
+	if(sugarShakeValue >= iconShakeDuration) {
+		isSugarShaking = 0;
+	}
+}
+
+function setSugarShaking() {
+	isSugarShaking = 1;
+	sugarShakeValue = 0;
+}
+
+var isFatShaking = 0;
+var fatShakeStartPositionX = -10;
+var fatShakeEndPositionX = 10;
+var fatShakeDuration = 5;
+var fatShakeValue = sugarShakeDuration / 2;
+var fatShakeOffsetX = 0;
+
+function updateFatShaking() {
+	if(!isFatShaking) {
+		fatShakeOffsetX = 0;
+		return;
+	}
+	
+	fatShakeValue = (sugarShakeValue + 1);
+	var dtime = fatShakeValue % fatShakeDuration;
+    var t = fatShakeDuration / fatShakeDuration;
+    fatShakeOffsetX = interpolateValues(fatShakeStartPositionX, fatShakeEndPositionX, headBobbingTweening(t));
+	
+	if(fatShakeValue >= iconShakeDuration) {
+		isFatShaking = 0;
+	}
+}
+
+function setFatShaking() {
+	isFatShaking = 1;
+	fatShakeValue = 0;
+}
+
 
 var armRotationStart = 0;
 var armRotationEnd = 0.3;
@@ -216,7 +275,6 @@ function evaluateFood() {
     var categoryName = selectedFoodCategory;
     var food = categoryMap[categoryName][foodName];
     
-    
     energy += food.kcal;
     protein += food.protein;
     fat += food.fat;
@@ -228,7 +286,15 @@ function evaluateFood() {
     water += (categoryName == "drinks") + (foodName == "water");
     vegetables += (categoryName == "vegetables");
     fruits += (categoryName == "fruits");
-
+	
+	if(sugar - food.suger > recommendedSugar && sugar > recommendedSugar && sugar > 0) {
+		setSugarShaking();	
+	}
+	
+		if(fat - food.fat > recommendedFat && fat > recommendedFat && fat > 0) {
+		setFatShaking();	
+	}
+	
     calculateFatness();
 }
 
@@ -418,7 +484,7 @@ function drawTail() {
     drawImageWithAngle(img, tailRotation, 243, 332);
 }
 
-function drawIcon(name, percent, number, bad) {
+function drawIcon(name, percent, number, bad, offsetX) {
     var img = images[name];
 
     var hRatio = canvas.width / img.width;
@@ -426,7 +492,7 @@ function drawIcon(name, percent, number, bad) {
     ratio = Math.min(hRatio, vRatio);
 
     context.beginPath();
-    context.rect(canvas.width - img.width * ratio + 2, ratio * (18+ number * 298 + 298 * (1 - percent)), img.width * ratio - 5, ratio * 298 * percent);
+    context.rect(canvas.width - img.width * ratio + 2 + offsetX, ratio * (18+ number * 298 + 298 * (1 - percent)), img.width * ratio - 5, ratio * 298 * percent);
     if (bad) {
         if (percent > 0.66) context.fillStyle = "red";
         else if (percent > 0.33) context.fillStyle = "orange";
@@ -454,10 +520,13 @@ function drawIcons() {
     ratio = Math.min(hRatio, vRatio);
     context.drawImage(img, 0, 0, img.width, img.height, canvas.width - img.width * ratio, 0, img.width * ratio, img.height * ratio);
 
-    drawIcon("vis_vitamine", vitamine_percent, 0, false);
-    drawIcon("vis_sugar", sugar_percent, 1, true);
-    drawIcon("vis_fat", fat_percent, 2, true)
-    drawIcon("vis_water", water_percent, 3, false);
+	updateFatShaking();
+	updateSugarShaking();
+	
+    drawIcon("vis_vitamine", vitamine_percent, 0, false, 0);
+    drawIcon("vis_sugar", sugar_percent, 1, true, sugarShakeOffsetX);
+    drawIcon("vis_fat", fat_percent, 2, true, fatShakeOffsetX)
+    drawIcon("vis_water", water_percent, 3, false, 0);
 
     img = images["background2"];
     var hRatio = canvas.width / img.width;
