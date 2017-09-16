@@ -116,3 +116,9 @@ var lemonade = { "name": "lemonade", "kcal": 136, "protein": 0.26, "carbohydrate
 var energyDrink = { "name": "energyDrink", "kcal": 108, "protein": 0.6, "carbohydrates": 26.26, "sugar": 24.14, "fat": 0.19, "saturatedFat": 0, "fiber": 0, "salt": 202 };
 var beer = { "name": "beer", "kcal": 220, "protein": 2.35, "carbohydrates": 18, "sugar": 0, "fat": 0, "saturatedFat": 0, "fiber": 0, "salt": 20 };
 var wine = { "name": "wine", "kcal": 213, "protein": 0.16, "carbohydrates": 6.25, "sugar": 1.6, "fat": 0, "saturatedFat": 0, "fiber": 0, "salt": 10 };
+
+var drinks = []
+[water, juice, milk, coffee, tea, lemonade, energyDrink, beer, wine]
+    .forEach(function (entry) {
+        drinks[entry.name] = entry;
+    });
