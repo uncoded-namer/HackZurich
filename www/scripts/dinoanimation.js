@@ -10,6 +10,34 @@ var fpsInterval = setInterval(updateFPS, 1000);
 var numFramesDrawn = 0;
 var curFPS = 0;
 
+// TODO: refactor
+
+var recommendedEnergy = 2000;
+var recommendedProtein = 50;
+var recommendedFat = 70;
+var recommendedSaturatedFat = 24;
+var recommendedCarbohydrates = 310;
+var recommendedSugar = 90;
+var recommendedSalt = 2.3;
+var recommendedFiber = 30; // g
+var recommendedWater = 1.5; // L
+var recommendedVegetables = 3; // pieces
+var recommendedFruits = 2; // kilos
+
+
+var energy = recommendedEnergy;
+var protein = recommendedProtein;
+var fat = recommendedFat;
+var saturatedFat = recommendedSaturatedFat;
+var carbohydrates = recommendedCarbohydrates;
+var sugar = recommendedSugar;
+var salt = recommendedSalt;
+var fiber = recommendedFiber;
+var water = recommendedWater;
+var vegetables = recommendedVegetables;
+var fruits = recommendedFruits;
+
+
 function updateFPS() {
 
     curFPS = numFramesDrawn;
@@ -60,6 +88,27 @@ function resourceLoaded() {
 
         setInterval(redraw, 1000 / fps);
     }
+}
+
+function isHealthy() {
+    return false;
+}
+
+function isRipped() {
+    return false;
+}
+
+function isObese() {
+    return false;
+}
+
+function isStarving() {
+    return false;
+}
+
+
+function isObese() {
+    return false;
 }
 
 function drawHead() {
