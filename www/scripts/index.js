@@ -93,19 +93,18 @@ var movingImagePosOffset = 24; // TODO: prettier
         var moveEvent = isTouchSupport ? 'touchmove' : 'mousemove';
         var endEvent = isTouchSupport ? 'touchend' : 'mouseup';
 
-        console.log("in start");
         Object.keys(categoryMap).forEach(function(key) {
             var category = key;
             var foodsByName = categoryMap[category];
-            console.log(key);
             $("#category-headers").append("<li><a data-toggle=\"tab\" href=\"#" + category + "\"><img src=\"images/placeholder/button.png\" /></a></li>");
             $("#category-content").append("<div id=\"" + category + "\" class=\"tab-pane fade\">");
             Object.keys(foodsByName).forEach(function(name) {
-                console.log(name);
                 $("#" + category).append("<a role=\"button\" class=\"btn food-button\" food=\"" + name + "\"><img src=\"images/icons/" + name + ".png\" /></a>");
             });
         });
-        console.log("after build");
+        $("#category-headers li").first().addClass("active");
+        $("#category-content div").first().addClass("in active");
+
         document.addEventListener(moveEvent, movePointer, false);
         $(".food-button").on(startEvent, startMovePointer);
         $("body").on(startEvent, startMovePointerGeneral);
