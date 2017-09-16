@@ -19,23 +19,23 @@ var recommendedFat = 70;
 var recommendedSaturatedFat = 24;
 var recommendedCarbohydrates = 310;
 var recommendedSugar = 90;
-var recommendedSalt = 2.3;
+var recommendedSalt = 2300; // mg
 var recommendedFiber = 30; // g
-var recommendedWater = 1.5; // L
+var recommendedWater = 10; // pieces
 var recommendedVegetables = 3; // pieces
-var recommendedFruits = 2; // kilo
+var recommendedFruits = 2; // pieces
 
-var energy = recommendedEnergy;
-var protein = recommendedProtein;
-var fat = recommendedFat;
-var saturatedFat = recommendedSaturatedFat;
-var carbohydrates = recommendedCarbohydrates;
-var sugar = recommendedSugar;
-var salt = recommendedSalt;
-var fiber = recommendedFiber;
-var water = recommendedWater;
-var vegetables = recommendedVegetables;
-var fruits = recommendedFruits;
+var energy = 0;
+var protein = 0;
+var fat = 0;
+var saturatedFat = 0;
+var carbohydrates = 0;
+var sugar = 0;
+var salt = 0;
+var fiber = 0;
+var water = 0;
+var vegetables = 0;
+var fruits = 0;
 
 var fatness = 0; // TODO: remove
 
@@ -192,7 +192,22 @@ function updateTailRotation() {
 
 function evaluateFood() {
     var foodName = selectedFoodName;
-    // TODO
+    var categoryName = selectedFoodCategory;
+    var food = categoryMap[categoryName][foodName];
+    
+
+    console.log("adding kal!");
+    energy += food.kcal;
+    protein += food.protein;
+    fat += food.fat;
+    saturatedFat += food.saturatedFat;
+    carbohydrates += food.carbohydrates;
+    sugar += food.sugar;
+    salt += food.salt;
+    fiber += food.fiber;
+    water += (categoryName == "drinks") + (foodName == "water");
+    vegetables += (categoryName == "vegetables");
+    fruits += (categoryName == "fruits");
 }
 
 function updateMouthState() {
@@ -207,7 +222,6 @@ function updateMouthState() {
     if (!isHolding) {
         if (mouthState == 1 || mouthState == 2) {
             evaluateFood();
-            fatness += 1; // TODO
         }
 
         if (mouthState == 1) mouthState = 0;
@@ -385,10 +399,10 @@ function drawIcon(name, percent, number, bad) {
 }
 
 function drawIcons() {
-    var fat_percent = 0.8;
-    var sugar_percent = 0.3;
-    var vitamine_percent = 0.5;
-    var water_percent = 0.2; // TODO!
+    var fat_percent = Math.min(1, fat / recommendedFat);
+    var sugar_percent = Math.min(1, sugar / recommendedSugar);
+    var vitamine_percent = Math.min(1, (fruits + vegetables) / (recommendedFruits + recommendedVegetables));
+    var water_percent = Math.min(1, water / recommendedWater); 
 
     var img = images["background1"];
     var hRatio = canvas.width / img.width;

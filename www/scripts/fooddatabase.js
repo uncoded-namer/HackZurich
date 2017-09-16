@@ -41,7 +41,7 @@ var vegetables = [];
     });
 
 //meats
-var groundBeef = { "name": "groundBeef", "kcal": 235, "protein": 21.55, "carbohydrates": 0, "sugar": 0, "fat": , "saturatedFat": , "fiber": , "salt":  };
+var groundBeef = { "name": "groundBeef", "kcal": 235, "protein": 21.55, "carbohydrates": 0, "sugar": 0, "fat": 15.79, "saturatedFat": 6.11, "fiber": 0, "salt":  340};
 var chicken = { "name": "chicken", "kcal": 302, "protein": 45.8, "carbohydrates": 0, "sugar": 0, "fat": 11.97, "saturatedFat": 3.37, "fiber": 0, "salt": 609 };
 var lamb = { "name": "lamb", "kcal": 391, "protein": 32.59, "carbohydrates": 0, "sugar": 0, "fat": 27.83, "saturatedFat": 11.73, "fiber": 0, "salt": 528 };
 var beef = { "name": "beef", "kcal": 358, "protein": 34.72, "carbohydrates": 0, "sugar": 0, "fat": 23.21, "saturatedFat": 9.13, "fiber": 0, "salt": 291 };
@@ -117,7 +117,7 @@ var energyDrink = { "name": "energyDrink", "kcal": 108, "protein": 0.6, "carbohy
 var beer = { "name": "beer", "kcal": 220, "protein": 2.35, "carbohydrates": 18, "sugar": 0, "fat": 0, "saturatedFat": 0, "fiber": 0, "salt": 20 };
 var wine = { "name": "wine", "kcal": 213, "protein": 0.16, "carbohydrates": 6.25, "sugar": 1.6, "fat": 0, "saturatedFat": 0, "fiber": 0, "salt": 10 };
 
-var drinks = []
+var drinks = [];
 [water, juice, milk, coffee, tea, lemonade, energyDrink, beer, wine]
     .forEach(function (entry) {
         drinks[entry.name] = entry;

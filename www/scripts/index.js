@@ -7,7 +7,18 @@ startX = 0;
 startY = 0;
 pointerPositionX = 0;
 pointerPositionY = 0;
+selectedFoodCategory = "";
 selectedFoodName = "";
+
+var categoryMap = [];
+categoryMap["fruits"] = fruits;
+categoryMap["vegetables"] = vegetables;
+categoryMap["meats"] = meats;
+categoryMap["milkProducts"] = milkProducts;
+categoryMap["cornProducts"] = cornProducts;
+categoryMap["sweets"] = sweets;
+categoryMap["drinks"] = drinks;
+
 var i = 0;
 
 var pointerEventToXY = function (e) {
@@ -23,6 +34,9 @@ var pointerEventToXY = function (e) {
     return out;
 };
 
+var movingImagePosOffset = 24; // TODO: prettier
+
+
 (function () {
     "use strict";
 
@@ -34,20 +48,22 @@ var pointerEventToXY = function (e) {
             var position = pointerEventToXY(event);
             pointerPositionX = position.x;
             pointerPositionY = position.y;
-            $("#movingImage").css({ left: pointerPositionX, top: pointerPositionY });
+            $("#movingImage").css({ left: pointerPositionX - movingImagePosOffset, top: pointerPositionY - movingImagePosOffset });
         }
     }
 
+  
     function startMovePointer(event) {
         event.preventDefault();
         event.stopPropagation();
         move = true;
-        selectedFoodName = $(this).children("img").get(0).parentElement.getAttribute("name"); // TODO: what
+        selectedFoodName = $(this).attr("food");
+        selectedFoodCategory = $(this).parent().attr("id");
         var imageUrl = $(this).children("img").get(0).getAttribute("src");
         var position = pointerEventToXY(event);
         pointerPositionX = position.x;
         pointerPositionY = position.y;
-        $("#movingImage").css({ left: pointerPositionX, top: pointerPositionY });
+        $("#movingImage").css({ left: pointerPositionX - movingImagePosOffset, top: pointerPositionY - movingImagePosOffset });
         $("#movingImage").attr("src", imageUrl);
     }
 
@@ -56,7 +72,7 @@ var pointerEventToXY = function (e) {
         event.stopPropagation();
         move = false;
         $("#movingImage").attr("src", "");
-        $("#movingImage").css({ left: startX, top: startY });
+        $("#movingImage").css({ left: startX , top: startY });
     }
 
     function onDeviceReady() {

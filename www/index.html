@@ -20,7 +20,7 @@
 
 <body style="background-color:#efd0cc">
     <img id="movingImage" src="" />
-    <div id="canvasDiv" class="grid-row-upper" id="dino-container">
+    <div id="canvasDiv" class="grid-row-upper">
         <div class="debug"></div>
     </div>
     <div class="grid-row-lower debug">
@@ -28,7 +28,7 @@
         <div class="container-fluid">
             <div class="row" id="food-container">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#fruits"><img src="images/placeholder/button.png"/></a></li>
+                    <li class="active"><a data-toggle="tab" href="#fruits"><img src="images/icons/Apple.png"/></a></li>
                     <li><a data-toggle="tab" href="#vegetables"><img src="images/placeholder/button.png" /></a></li>
                     <li><a data-toggle="tab" href="#meats"><img src="images/placeholder/button.png" /></a></li>
                     <li><a data-toggle="tab" href="#fast-food"><img src="images/placeholder/button.png" /></a></li>
@@ -36,9 +36,9 @@
                 
                 <div class="tab-content">
                     <div id="fruits" class="tab-pane fade in active">
-                        <a role="button" class="btn food-button" name="gay banana"><img src="images/placeholder/button.png" /></a>
-                        <a role="button" class="btn food-button" name="gay apple"><img src="images/placeholder/button.png" /></a>
-                        <a role="button" class="btn food-button" name="gay orange"><img src="images/placeholder/button.png" /></a>
+                        <a role="button" class="btn food-button" food="apple"><img src="images/icons/apple.png" /></a>
+                        <a role="button" class="btn food-button" food="avocado"><img src="images/icons/avocado.png" /></a>
+                        <a role="button" class="btn food-button" food="banana"><img src="images/icons/banana.png" /></a>
                     </div>
                     <div id="vegetables" class="tab-pane fade">
                         <p>vegetables</p>
@@ -58,6 +58,7 @@
    
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/fooddatabase.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
     <script type="text/javascript" src="scripts/dinoanimation.js"></script>
     <style>
