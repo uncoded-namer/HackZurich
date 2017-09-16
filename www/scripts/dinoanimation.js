@@ -1,7 +1,7 @@
 ﻿var canvas;
 var context;
 var images = {};
-var totalResources = 24; // TODO: think
+var totalResources = 26; // TODO: think
 var numResourcesLoaded = 0;
 var fps = 30;
 var fpsInterval = setInterval(updateFPS, 1000);
@@ -15,6 +15,10 @@ var isExcited = false;
 var excitementCounter = 0;
 var excitementDuration = 30;
 
+var isSpeaking = 0;
+var speakDuration = 200;
+var speakDurationCounter = 0;
+var speakTexture;
 // TODO: refactor
 
 var recommendedEnergy = 2000;
@@ -101,6 +105,8 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight) {
     loadImage("vis_vitamine");
     loadImage("vis_water");
     loadImage("speechbubble");
+    loadImage("speech_water");
+    loadImage("speech_apple");
 }
 
 function loadImage(name) {
@@ -530,6 +536,60 @@ function updateExcitement() {
 
 }
 
+function isThirsty() {
+    return water < recommendedWater / 4;
+}
+
+
+function needsApples() {
+    return fruits < recommendedFruits / 2;
+}
+
+function selectSpeechBubbleTexture() {
+    if (isThirsty()) speakTexture = images["speech_water"];
+    else speakTexture = images["speech_apple"];
+
+}
+
+function checkActivateSpeechBubble() {
+    if ((isThirsty() || needsApples()) && Math.random() < 0.001) {
+        isSpeaking = 1;
+        speakDurationCounter = 0;
+        selectSpeechBubbleTexture();
+    }
+
+}
+
+function deactivateSpeechBubble() {
+    isSpeaking = 0;
+    stopExcitement();
+}
+
+function updateSpeechBubble() {
+    if (!isSpeaking) {
+        checkActivateSpeechBubble();
+        return;
+    }
+
+    startExcitement();
+    speakDurationCounter += 1;
+    if (speakDurationCounter >= speakDuration) {
+        deactivateSpeechBubble();
+    }
+
+}
+
+function drawSpeechBubble() {
+    if (!isSpeaking) return;
+
+    startExcitement();
+    var img = images["speechbubble"];
+    drawImageGeneral(img);
+
+    img = speakTexture;
+    drawImageGeneral(img);
+}
+
 function redraw() {
 
     updateExcitement();
@@ -538,6 +598,7 @@ function redraw() {
     updateFootRotation();
     updateTailRotation();
     updateMouthState();
+    updateSpeechBubble();
 
     clearCanvas();
 
@@ -548,6 +609,7 @@ function redraw() {
     drawHands();
     drawFeet();
     drawHead();
+    drawSpeechBubble();
 }
 
 prepareCanvas(document.getElementById("canvasDiv"), $(window).width(), $(window).height() / 5 * 3);
