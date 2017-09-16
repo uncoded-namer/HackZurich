@@ -40,7 +40,7 @@ var vegetables = [];
         vegetables[entry.name] = entry;
     });
 
-//meats
+//animal products
 var groundBeef = { "name": "groundBeef", "kcal": 235, "protein": 21.55, "carbohydrates": 0, "sugar": 0, "fat": 15.79, "saturatedFat": 6.11, "fiber": 0, "salt":  340};
 var chicken = { "name": "chicken", "kcal": 302, "protein": 45.8, "carbohydrates": 0, "sugar": 0, "fat": 11.97, "saturatedFat": 3.37, "fiber": 0, "salt": 609 };
 var lamb = { "name": "lamb", "kcal": 391, "protein": 32.59, "carbohydrates": 0, "sugar": 0, "fat": 27.83, "saturatedFat": 11.73, "fiber": 0, "salt": 528 };
@@ -56,13 +56,6 @@ var burger = { "name": "burger", "kcal": 351, "protein": 18.01, "carbohydrates":
 var pizza = { "name": "pizza", "kcal": 1773, "protein": 71.21, "carbohydrates": 185.24, "sugar": 11.84, "fat": 81.28, "saturatedFat": 32.34, "fiber": 9.4, "salt": 4082 };
 var fries = { "name": "fries", "kcal": 319, "protein": 3.76, "carbohydrates": 37.53, "sugar": 0.68, "fat": 17.03, "saturatedFat": 4.03, "fiber": 3.5, "salt": 193 };
 var nuggets = { "name": "nuggets", "kcal": 297, "protein": 15.59, "carbohydrates": 16.32, "sugar": 0.88, "fat": 18.82, "saturatedFat": 4.02, "fiber": 0.9, "salt": 574 };
-var meats = [];
-[groundBeef, chicken, lamb, beef, pork, bratwurst, sausage, friedFish, cookedFish, smokedFish, burger, pizza, fries, nuggets]
-    .forEach(function (entry) {
-        meats[entry.name] = entry;
-    });
-
-//milk products
 var butter = { "name": "butter", "kcal": 36, "protein": 0.04, "carbohydrates": 0, "sugar": 0, "fat": 4.06, "saturatedFat": 2.57, "fiber": 0, "salt": 1 };
 var cheese = { "name": "cheese", "kcal": 101, "protein": 7.08, "carbohydrates": 0.47, "sugar": 0.47, "fat": 7.85, "saturatedFat": 4.99, "fiber": 0, "salt": 261 };
 var creamCheese = { "name": "creamCheese", "kcal": 51, "protein": 1.09, "carbohydrates": 0.39, "sugar": 0.03, "fat": 5.06, "saturatedFat": 3.19, "fiber": 0, "salt": 43 };
@@ -70,10 +63,10 @@ var joghurt = { "name": "joghurt", "kcal": 250, "protein": 10.71, "carbohydrates
 var cream = { "name": "cream", "kcal": 104, "protein": 0.62, "carbohydrates": 0.84, "sugar": 0.03, "fat": 11.1, "saturatedFat": 6.91, "fiber": 0, "salt": 11 };
 var egg = { "name": "egg", "kcal": 74, "protein": 6.29, "carbohydrates": 0.38, "sugar": 0.38, "fat": 4.97, "saturatedFat": 1.55, "fiber": 0, "salt": 70 };
 
-var milkProducts = [];
-[butter, cheese, creamCheese, joghurt, cream, egg]
+var animalProducts = [];
+[groundBeef, chicken, lamb, beef, pork, bratwurst, sausage, friedFish, cookedFish, smokedFish, burger, pizza, fries, nuggets, butter, cheese, creamCheese, joghurt, cream, egg]
     .forEach(function (entry) {
-        milkProducts[entry.name] = entry;
+        animalProducts[entry.name] = entry;
     });
 
 //corn products
