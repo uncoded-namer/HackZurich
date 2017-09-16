@@ -3,6 +3,7 @@
 // Zum Debuggen von Code beim Laden einer Seite in cordova-simulate oder auf Android-Geräten/-Emulatoren: Starten Sie Ihre App, legen Sie Haltepunkte fest, 
 // und führen Sie dann "window.location.reload()" in der JavaScript-Konsole aus.
 move = false;
+moveGeneral = false;
 startX = 0;
 startY = 0;
 pointerPositionX = 0;
@@ -44,14 +45,21 @@ var movingImagePosOffset = 24; // TODO: prettier
 
     function movePointer(event) {
         event.preventDefault();
+        var position = pointerEventToXY(event);
+        pointerPositionX = position.x;
+        pointerPositionY = position.y;
         if (move) {
-            var position = pointerEventToXY(event);
-            pointerPositionX = position.x;
-            pointerPositionY = position.y;
             $("#movingImage").css({ left: pointerPositionX - movingImagePosOffset, top: pointerPositionY - movingImagePosOffset });
         }
     }
 
+
+    function startMovePointerGeneral(event) {
+        event.preventDefault();
+        moveGeneral = true;
+        pointerPositionX = position.x;
+        pointerPositionY = position.y;
+    }
   
     function startMovePointer(event) {
         event.preventDefault();
@@ -71,6 +79,7 @@ var movingImagePosOffset = 24; // TODO: prettier
         event.preventDefault();
         event.stopPropagation();
         move = false;
+        moveGeneral = false;
         $("#movingImage").attr("src", "");
         $("#movingImage").css({ left: startX , top: startY });
     }
@@ -100,6 +109,7 @@ var movingImagePosOffset = 24; // TODO: prettier
         console.log("after build");
         document.addEventListener(moveEvent, movePointer, false);
         $(".food-button").on(startEvent, startMovePointer);
+        $("body").on(startEvent, startMovePointerGeneral);
         $("body").on(endEvent, endMovePointer);
     }
 
