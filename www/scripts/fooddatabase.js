@@ -18,8 +18,7 @@ var fruits = [];
     });
 
 //vegetables
-//var eggplant = { "name": "eggplant", "kcal": 33, "protein": 0.39, "carbohydrates": 4.16, "sugar": 1.51, "fat": 1.92, "saturatedFat": 0.36, "fiber": 1.2, "salt": 244 };
-var eggplant = { "name": "eggplant", "kcal": 2001, "protein": 2000, "carbohydrates": 0, "sugar": 0, "fat": 0, "saturatedFat": 0, "fiber": 1000, "salt": 0 };
+var eggplant = { "name": "eggplant", "kcal": 33, "protein": 0.39, "carbohydrates": 4.16, "sugar": 1.51, "fat": 1.92, "saturatedFat": 0.36, "fiber": 1.2, "salt": 244 };
 var cauliflower = { "name": "cauliflower", "kcal": 25, "protein": 1.98, "carbohydrates": 5.3, "sugar": 2.4, "fat": 0.1, "saturatedFat": 0.03, "fiber": 2.5, "salt": 30 };
 var brokkoli = { "name": "brokkoli", "kcal": 31, "protein": 2.57, "carbohydrates": 6.04, "sugar": 1.55, "fat": 0.34, "saturatedFat": 0.04, "fiber": 2.4, "salt": 30 };
 var peas = { "name": "peas", "kcal": 117, "protein": 7.86, "carbohydrates": 20.97, "sugar": 8.22, "fat": 0.58, "saturatedFat": 0.1, "fiber": 7.4, "salt": 7 };

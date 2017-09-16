@@ -195,8 +195,7 @@ function updateTailRotation() {
 }
 
 function calculateFatness() {
-    if(1) {
-    //if (water > recommendedWater && energy > recommendedEnergy && sugar < recommendedSugar && fat < recommendedFat && protein >= recommendedProtein) {
+    if (water > recommendedWater && energy > recommendedEnergy && sugar < recommendedSugar && fat < recommendedFat && protein >= recommendedProtein) {
         fatness = 0;
         if (fruits >= recommendedFruits && vegetables >= recommendedVegetables && carbohydrates < recommendedCarbohydrates / 2) muscle = 2;
         else muscle = 1;
