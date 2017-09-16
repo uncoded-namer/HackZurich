@@ -41,7 +41,8 @@ var water = 0;
 var vegetables = 0;
 var fruits = 0;
 
-var fatness = 0; // TODO: remove
+var fatness = 0; 
+var muscle = 0;
 
 function updateFPS() {
 
@@ -193,14 +194,24 @@ function updateTailRotation() {
     tailRotation = interpolateValues(tailRotationStart, tailRotationEnd, armRotationTweening(t));
 }
 
+function calculateFatness() {
+    if(1) {
+    //if (water > recommendedWater && energy > recommendedEnergy && sugar < recommendedSugar && fat < recommendedFat && protein >= recommendedProtein) {
+        fatness = 0;
+        if (fruits >= recommendedFruits && vegetables >= recommendedVegetables && carbohydrates < recommendedCarbohydrates / 2) muscle = 2;
+        else muscle = 1;
+    } else {
+       fatness = Math.min(Math.max(0, Math.floor((energy - 2000) / 500)), 4);
+        muscle = 0;
+    }
+}
 
 function evaluateFood() {
     var foodName = selectedFoodName;
     var categoryName = selectedFoodCategory;
     var food = categoryMap[categoryName][foodName];
     
-
-    console.log("adding kal!");
+    
     energy += food.kcal;
     protein += food.protein;
     fat += food.fat;
@@ -212,6 +223,8 @@ function evaluateFood() {
     water += (categoryName == "drinks") + (foodName == "water");
     vegetables += (categoryName == "vegetables");
     fruits += (categoryName == "fruits");
+
+    calculateFatness();
 }
 
 function updateMouthState() {
@@ -310,13 +323,14 @@ function drawShadow() {
     else if (fatness == 3) width = 390;
     else width = 420;
 
-    drawEllipse(canvas.width / 2.6, 390 * ratio, width * ratio, 50 * ratio);
+    drawEllipse(canvas.width * 0.35, canvas.height * 0.85, width * ratio, 50 * ratio);
 }
 
-function drawImageWithOffsetAndAngle(img, offsetX, offsetY, angle, centerX, centerY) {
+function drawImageWithOffsetAngleAndScale(img, offsetX, offsetY, angle, centerX, centerY, scaleX, scaleY) {
     var hRatio = canvas.width / img.width;
     var vRatio = canvas.height / img.height;
     ratio = Math.min(hRatio, vRatio);
+
     var centerShift_x = (canvas.width - img.width * ratio) / 2 + offsetX * ratio;
     var centerShift_y = (canvas.height - img.height * ratio) / 2 + offsetY * ratio;
     var cx = centerShift_x + centerX * ratio;
@@ -324,21 +338,25 @@ function drawImageWithOffsetAndAngle(img, offsetX, offsetY, angle, centerX, cent
 
     context.translate(cx, cy);
     context.rotate(angle);
+    context.scale(scaleX, scaleY);
     context.drawImage(img, 0, 0, img.width, img.height, -centerX * ratio, -centerY * ratio, img.width * ratio, img.height * ratio);
+    context.scale(1 / scaleX, 1 / scaleY);
     context.rotate(-angle);
     context.translate(-cx, -cy);
 }
 
 
 function drawImageWithOffset(img, offsetX, offsetY) {
-    drawImageWithOffsetAndAngle(img, offsetX, offsetY, 0, 0, 0);
+    drawImageWithOffsetAngleAndScale(img, offsetX, offsetY, 0, 0, 0, 1, 1);
 }
-
 
 function drawImageWithAngle(img, angle, centerX, centerY) {
-    drawImageWithOffsetAndAngle(img, 0, 0, angle, centerX, centerY);
+    drawImageWithOffsetAngleAndScale(img, 0, 0, angle, centerX, centerY, 1, 1);
 }
 
+function drawImageWithScale(img, scaleX, scaleY, scaleCenterX, scaleCenterY) {
+    drawImageWithOffsetAngleAndScale(img, 0, 0, 0, scaleCenterX, scaleCenterY, scaleX, scaleY);
+}
 
 function drawImageGeneral(img) {
     drawImageWithOffset(img, 0, 0);
@@ -350,15 +368,31 @@ function drawHead() {
     drawImageWithOffset(img, 0, headBobbingOffsetY);
 }
 
-function drawBody() {
-    var img;
-    if (fatness == 0) img = images["body"];
-    else if (fatness == 1) img = images["body_fat1"];
-    else if (fatness == 2) img = images["body_fat2"];
-    else if (fatness == 3) img = images["body_fat3"];
-    else img = images["body_fat4"];
-    drawImageGeneral(img);
+function getBodyImageBasedOnFatness() {
+    if (fatness == 0) return images["body"];
+    else if (fatness == 1) return images["body_fat1"];
+    else if (fatness == 2) return images["body_fat2"];
+    else if (fatness == 3) return images["body_fat3"];
+    else return images["body_fat4"];
+
 }
+
+function drawBody() {
+    var img = getBodyImageBasedOnFatness();
+
+    var scaleX;
+    if (muscle == 1) scaleX = 1;
+    else if (muscle == 2) scaleX = 1;
+    else scaleX = 1;
+    drawImageWithScale(img, scaleX, 1, 155, 298);
+
+    if (muscle == 0) return;
+    if (muscle == 1) img = images["sixpack1"];
+    else img = images["sixpack2"];
+    drawImageWithScale(img, scaleX, 1, 155, 298);
+}
+
+
 
 function drawHands() {
     var img = images["left_hand"];
