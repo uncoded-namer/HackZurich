@@ -11,6 +11,10 @@ var mouthState = 0; // 0 = closed, 1 opening, 2 open, 3 closing
 var mouthHalfFrameAmount = 4;
 var mouthHalfFrameCounter = 0;
 
+var isExcited = false;
+var excitementCounter = 0;
+var excitementDuration = 30;
+
 // TODO: refactor
 
 var recommendedEnergy = 2000;
@@ -221,6 +225,7 @@ function updateMouthState() {
     var isHolding = move;
     if (!isHolding) {
         if (mouthState == 1 || mouthState == 2) {
+            startExcitement();
             evaluateFood();
         }
 
@@ -422,8 +427,79 @@ function drawIcons() {
     context.drawImage(img, 0, 0, img.width, img.height, canvas.width - img.width * ratio, 0, img.width * ratio, img.height * ratio);
 }
 
+function startExcitement() {
+    headBobbingStartPositionY = 0;
+    headBobbingEndPositionY = 10;
+    headBobbingDuration = 10;
+
+    armRotationStart = 0;
+    armRotationEnd = 0.3;
+    armRotationDuration = 10;
+
+    footRotationStart = -0.07;
+    footRotationEnd = 0.07;
+    footRotationDuration = 20;
+
+    tailRotationStart = -0.04;
+    tailRotationEnd = 0.04;
+    tailRotationDuration = 10;
+
+    isExcited = 1;
+    excitementCounter = 0;
+}
+
+function stopExcitement() {
+    headBobbingStartPositionY = 0;
+    headBobbingEndPositionY = 5;
+    headBobbingDuration = 180;
+
+    armRotationStart = 0;
+    armRotationEnd = 0.3;
+    armRotationDuration = 120;
+
+    footRotationStart = -0.07;
+    footRotationEnd = 0.07;
+    footRotationDuration = 180;
+
+    tailRotationStart = -0.04;
+    tailRotationEnd = 0.04;
+    tailRotationDuration = 140;
+
+    isExcited = false;
+}
+
+function getPointerDistance(x, y) {
+    var px = pointerPositionX;
+    var py = pointerPositionY;
+    var dx = px - x;
+    var dy = py - y;
+
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+function checkStartExcitement() {
+    if (moveGeneral && getPointerDistance(canvas.width * 0.5, canvas.height * 0.7) < 80) {
+        startExcitement();
+    }
+    return;
+}
+
+function updateExcitement() {
+    if (!isExcited) {
+        checkStartExcitement();
+        return;
+    }
+
+    excitementCounter++;
+    if (excitementCounter >= excitementDuration) {
+        stopExcitement();
+    }
+
+}
+
 function redraw() {
 
+    updateExcitement();
     updateHeadBobbing();
     updateArmRotation();
     updateFootRotation();
