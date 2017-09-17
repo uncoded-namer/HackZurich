@@ -406,8 +406,8 @@ function drawShadow() {
     else if (fatness == 2) width = 360;
     else if (fatness == 3) width = 390;
     else width = 420;
-
-    drawEllipse(canvas.width * 0.35, canvas.height * 0.85, width * ratio, 50 * ratio);
+     
+    drawEllipse(160 * ratio, 430 * ratio, width * ratio, 50 * ratio);
 }
 
 function drawImageWithOffsetAngleAndScale(img, offsetX, offsetY, angle, centerX, centerY, scaleX, scaleY) {
