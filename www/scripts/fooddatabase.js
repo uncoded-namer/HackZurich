@@ -10,9 +10,13 @@ var grapefruit = { "name": "grapefruit", "kcal": 41, "protein": 0.81, "carbohydr
 var kiwi = { "name": "kiwi", "kcal": 46, "protein": 0.87, "carbohydrates": 11.14, "sugar": 6.83, "fat": 0.4, "saturatedFat": 0.02, "fiber": 2.3, "salt": 2 };
 var watermelon = { "name": "watermelon", "kcal": 46, "protein": 0.93, "carbohydrates": 11.48, "sugar": 9.42, "fat": 0.23, "saturatedFat": 0.02, "fiber": 0.6, "salt": 2 };
 var orange = { "name": "orange", "kcal": 62, "protein": 1.23, "carbohydrates": 15.39, "sugar": 12.25, "fat": 0.16, "saturatedFat": 0.02, "fiber": 3.1, "salt": 0 };
+var nuts = { "name": "nuts", "kcal": 173, "protein": 4.62, "carbohydrates": 6.04, "sugar": 1.19, "fat": 15.76, "saturatedFat": 2.46, "fiber": 2.3, "salt": 111 };
+var peanuts = { "name": "peanuts", "kcal": 328, "protein": 13.36, "carbohydrates": 12.04, "sugar": 2.34, "fat": 27.8, "saturatedFat": 3.94, "fiber": 4.4, "salt": 456 }; // double portion
+var peach = { "name": "peach", "kcal": 38, "protein": 0.89, "carbohydrates": 9.35, "sugar": 8.22, "fat": 0.24, "saturatedFat": 0.02, "fiber": 1.5, "salt": 0 };
+var pomegrate = { "name": "pomegrate", "kcal": 105, "protein": 1.46, "carbohydrates": 26.44, "sugar": 25.52, "fat": 0.46, "saturatedFat": 0.06, "fiber": 0.9, "salt": 5 };
 
 var fruits = [];
-[pineapple, apple, avocado, banana, pear, strawberry, grapefruit, kiwi, watermelon, orange]
+[pineapple, apple, avocado, banana, pear, strawberry, grapefruit, kiwi, watermelon, orange, nuts, peach, peanuts, pomegrate]
     .forEach(function (entry) {
         fruits[entry.name] = entry;
     });
@@ -33,9 +37,11 @@ var spinach = { "name": "spinach", "kcal": 7, "protein": 0.86, "carbohydrates": 
 var tomato = { "name": "tomato", "kcal": 22, "protein": 1.08, "carbohydrates": 4.82, "sugar": 3.23, "fat": 0.25, "saturatedFat": 0.06, "fiber": 1.5, "salt": 6 };
 var zucchini = { "name": "zucchini", "kcal": 18, "protein": 1.37, "carbohydrates": 3.79, "sugar": 1.95, "fat": 0.2, "saturatedFat": 0.04, "fiber": 1.2, "salt": 11 };
 var onion = { "name": "onion", "kcal": 25, "protein": 0.55, "carbohydrates": 6.07, "sugar": 2.57, "fat": 0.05, "saturatedFat": 0.02, "fiber": 0.8, "salt": 2 };
+var oliveoil = { "name": "oliveoil", "kcal": 119, "protein": 0, "carbohydrates": 0, "sugar": 0, "fat": 13.5, "saturatedFat": 1.86, "fiber": 0, "salt": 0 };
+
 
 var vegetables = [];
-[eggplant, cauliflower, brokkoli, peas, cucumber, carrot, corn, olives, paprika, mushrooms, salad, spinach, tomato, zucchini, onion]
+[eggplant, cauliflower, brokkoli, peas, cucumber, carrot, corn, olives, paprika, mushrooms, salad, spinach, tomato, zucchini, onion, oliveoil]
     .forEach(function (entry) {
         vegetables[entry.name] = entry;
     });
@@ -62,9 +68,15 @@ var creamCheese = { "name": "creamCheese", "kcal": 51, "protein": 1.09, "carbohy
 var joghurt = { "name": "joghurt", "kcal": 250, "protein": 10.71, "carbohydrates": 46.67, "sugar": 46.67, "fat": 2.65, "saturatedFat": 1.71, "fiber": 0, "salt": 142 };
 var cream = { "name": "cream", "kcal": 104, "protein": 0.62, "carbohydrates": 0.84, "sugar": 0.03, "fat": 11.1, "saturatedFat": 6.91, "fiber": 0, "salt": 11 };
 var egg = { "name": "egg", "kcal": 74, "protein": 6.29, "carbohydrates": 0.38, "sugar": 0.38, "fat": 4.97, "saturatedFat": 1.55, "fiber": 0, "salt": 70 };
+var hotdog = { "name": "hotdog", "kcal": 284, "protein": 10.24, "carbohydrates": 22.85, "sugar": 4.23, "fat": 16.59, "saturatedFat": 6.17, "fiber": 1, "salt": 919 };
+var schaschlik = { "name": "schaschlik", "kcal": 167, "protein": 15.3, "carbohydrates": 1.36, "sugar": 0.11, "fat": 10.87, "saturatedFat": 3.35, "fiber": 0.7, "salt": 177 };
+var quesadila = { "name": "quesadila", "kcal": 596, "protein": 31.74, "carbohydrates": 37.06, "sugar": 1.86, "fat": 35.18, "saturatedFat": 16.3, "fiber": 2.4, "salt": 1378 };
+var sushi = { "name": "sushi", "kcal": 33, "protein": 1.38, "carbohydrates": 6.31, "sugar": 1.3, "fat": 0.12, "saturatedFat": 0.02, "fiber": 0.2, "salt": 58 };
+var taco = { "name": "taco", "kcal": 173, "protein": 9.67, "carbohydrates": 10.96, "sugar": 1.1, "fat": 10.25, "saturatedFat": 3.79, "fiber": 1.6, "salt": 227 };
+var wrap = { "name": "wrap", "kcal": 547, "protein": 29.64, "carbohydrates": 55.9, "sugar": 3.29, "fat": 22.03, "saturatedFat": 9.06, "fiber": 3.8, "salt": 797 };
 
 var animalProducts = [];
-[groundBeef, chicken, lamb, beef, pork, bratwurst, sausage, friedFish, cookedFish, smokedFish, burger, pizza, fries, nuggets, butter, cheese, creamCheese, joghurt, cream, egg]
+[chicken, lamb, beef, pork, bratwurst, friedFish, cookedFish, burger, pizza, fries, butter, cheese, cream, egg, hotdog, schaschlik, quesadila, sushi, taco, wrap]
     .forEach(function (entry) {
         animalProducts[entry.name] = entry;
     });
@@ -74,11 +86,14 @@ var bread = { "name": "bread", "kcal": 78, "protein": 2.74, "carbohydrates": 14.
 var toast = { "name": "toast", "kcal": 64, "protein": 1.98, "carbohydrates": 11.97, "sugar": 1.04, "fat": 0.88, "saturatedFat": 0.13, "fiber": 0.6, "salt": 130 };
 var oatmeal = { "name": "oatmeal", "kcal": 62, "protein": 2.59, "carbohydrates": 10.84, "sugar": 0.24, "fat": 1.02, "saturatedFat": 0.18, "fiber": 1.6, "salt": 119 };
 var potato = { "name": "potato", "kcal": 149, "protein": 3.58, "carbohydrates": 33.46, "sugar": 2.45, "fat": 0.21, "saturatedFat": 0.06, "fiber": 5.1, "salt": 13 };
+var sweetpotato = { "name": "sweetpotato", "kcal": 114, "protein": 2.09, "carbohydrates": 26.76, "sugar": 5.56, "fat": 0.07, "saturatedFat": 0.02, "fiber": 4, "salt": 73 };
 var rice = { "name": "rice", "kcal": 191, "protein": 3.56, "carbohydrates": 41.04, "sugar": 0, "fat": 0.83, "saturatedFat": 0.03, "fiber": 1, "salt": 582 };
 var noodles = { "name": "noodles", "kcal": 220, "protein": 8.06, "carbohydrates": 42.95, "sugar": 0.78, "fat": 1.29, "saturatedFat": 0.25, "fiber": 2.5, "salt": 325 };
+var brezel = { "name": "brezel", "kcal": 389, "protein": 9.43, "carbohydrates": 79.8, "sugar": 0.29, "fat": 3.56, "saturatedFat": 0.8, "fiber": 2, "salt": 1615  };
+var croissant = { "name": "croissant", "kcal": 231, "protein": 4.67, "carbohydrates": 26.11, "sugar": 6.42, "fat": 11.97, "saturatedFat": 6.65, "fiber": 1.5, "salt": 424 };
 
 var cornProducts = [];
-[bread, toast, oatmeal, potato, rice, noodles]
+[bread, toast, oatmeal, potato, sweetpotato, rice, noodles, brezel, croissant]
     .forEach(function (entry) {
         cornProducts[entry.name] = entry;
     });
@@ -92,9 +107,13 @@ var pudding = { "name": "pudding", "kcal": 197, "protein": 3.83, "carbohydrates"
 var chocolate = { "name": "chocolate", "kcal": 207, "protein": 1.6, "carbohydrates": 24.44, "sugar": 21.11, "fat": 14.02, "saturatedFat": 8.23, "fiber": 2.3, "salt": 7 };
 var bonbons = { "name": "bonbons", "kcal": 112, "protein": 0, "carbohydrates": 27.78, "sugar": 17.83, "fat": 0.06, "saturatedFat": 0, "fiber": 0, "salt": 11 };
 var gummibears = { "name": "gummibears", "kcal": 143, "protein": 0, "carbohydrates": 35.6, "sugar": 21.23, "fat": 0, "saturatedFat": 0, "fiber": 0, "salt": 16 };
+var doughnut = { "name": "doughnut", "kcal": 175, "protein": 1.89, "carbohydrates": 24.11, "sugar": 13.41, "fat": 8.36, "saturatedFat": 2.155, "fiber": 0.9, "salt": 143 };
+var nachos = { "name": "nachos", "kcal": 293, "protein": 4.67, "carbohydrates": 39.19, "sugar": 0.6, "fat": 14.02, "saturatedFat": 1.47, "fiber": 3.2, "salt": 253 };
+var sugar = { "name": "sugar", "kcal": 16, "protein": 0, "carbohydrates": 4.2, "sugar": 4.2, "fat": 0, "saturatedFat": 0, "fiber": 0, "salt": 0 };
+
 
 var sweets = [];
-[icecream, cookie, cake, pancake, pudding, chocolate, bonbons, gummibears]
+[icecream, cookie, cake, pancake, pudding, chocolate, bonbons, gummibears, doughnut, nachos, sugar]
     .forEach(function (entry) {
         sweets[entry.name] = entry;
     });
