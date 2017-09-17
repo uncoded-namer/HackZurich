@@ -291,7 +291,7 @@ function evaluateFood() {
 		setSugarShaking();	
 	}
 	
-		if(fat - food.fat > recommendedFat && fat > recommendedFat && food.fat > 0) {
+	if(fat - food.fat > recommendedFat && fat > recommendedFat && food.fat > 0) {
 		setFatShaking();	
 	}
 	
@@ -490,7 +490,7 @@ function drawTail() {
     drawImageWithAngle(img, tailRotation, 243, 332);
 }
 
-function drawIcon(name, percent, number, bad, offsetX) {
+function drawIcon(name, percent, number, bad, offsetX, add_percent) {
     var img = images[name];
 
     var hRatio = canvas.width / img.width;
@@ -511,6 +511,12 @@ function drawIcon(name, percent, number, bad, offsetX) {
     context.fill();
     context.closePath();
 
+    context.beginPath();
+    context.rect(canvas.width - img.width * ratio + 2, ratio * (18 + number * 298 + 298 * (1 - percent - add_percent)), img.width * ratio - 5, ratio * 298 * add_percent);
+    context.fillStyle = "blue";
+    context.fill();
+    context.closePath();
+
     context.drawImage(img, 0, 0, img.width, img.height, canvas.width - (img.width + offsetX) * ratio, 0, img.width * ratio, img.height * ratio);
 }
 
@@ -520,6 +526,22 @@ function drawIcons() {
     var vitamine_percent = Math.min(1, (fruits + vegetables) / (recommendedFruits + recommendedVegetables));
     var water_percent = Math.min(1, water / recommendedWater); 
 
+    var fatAdded, sugarAdded, vitamineAdded, waterAdded;
+    if (move) fatAdded = categoryMap[selectedFoodCategory][selectedFoodName].fat;
+    else fatAdded = 0;
+    if (move) sugarAdded = categoryMap[selectedFoodCategory][selectedFoodName].sugar;
+    else sugarAdded = 0;
+    if (move) vitamineAdded = selectedFoodCategory == "fruits" || selectedFoodCategory == "vegetables";
+    else vitamineAdded = 0;
+    if (move) waterAdded = ((selectedFoodCategory == "drinks") ? 1 : 0) + ((selectedFoodName == "water") ? 1 : 0); 
+    else waterAdded = 0;
+
+
+    var fat_add_percent = Math.min(1 - fat_percent, fatAdded / recommendedFat);
+    var sugar_add_percent = Math.min(1 - sugar_percent, sugarAdded / recommendedSugar);
+    var vitamine_add_percent = Math.min(1 - vitamine_percent, vitamineAdded / (recommendedFruits + recommendedVegetables));
+    var water_add_percent = Math.min(1 - water_percent, waterAdded / recommendedWater);
+
     var img = images["background1"];
     var hRatio = canvas.width / img.width;
     var vRatio = canvas.height / img.height;
@@ -528,11 +550,11 @@ function drawIcons() {
     
 	updateFatShaking();
 	updateSugarShaking();
-	
-    drawIcon("vis_vitamine", vitamine_percent, 0, false, 0);
-    drawIcon("vis_sugar", sugar_percent, 1, true, sugarShakeOffsetX);
-    drawIcon("vis_fat", fat_percent, 2, true, fatShakeOffsetX)
-    drawIcon("vis_water", water_percent, 3, false, 0);
+
+    drawIcon("vis_vitamine", vitamine_percent, 0, false, 0, vitamine_add_percent);
+    drawIcon("vis_sugar", sugar_percent, 1, true, sugarShakeOffsetX, sugar_add_percent);
+    drawIcon("vis_fat", fat_percent, 2, true, fatShakeOffsetX, fat_add_percent)
+    drawIcon("vis_water", water_percent, 3, false, 0, water_add_percent);
 
     img = images["background2"];
     var hRatio = canvas.width / img.width;
