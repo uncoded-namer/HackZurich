@@ -75,8 +75,6 @@ var movingImagePosOffset = 24; // TODO: prettier
     }
 
     function endMovePointer(event) {
-        event.preventDefault();
-        event.stopPropagation();
         move = false;
         moveGeneral = false;
         $("#movingImage").attr("src", "");
