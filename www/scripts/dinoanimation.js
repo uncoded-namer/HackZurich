@@ -1,7 +1,7 @@
 ﻿var canvas;
 var context;
 var images = {};
-var totalResources = 26; // TODO: think
+var totalResources = 27; // TODO: think
 var numResourcesLoaded = 0;
 var fps = 30;
 var fpsInterval = setInterval(updateFPS, 1000);
@@ -47,6 +47,8 @@ var fruits = 0;
 
 var fatness = 0; 
 var muscle = 0;
+
+var consecutiveBurgerAmount = 0;
 
 function updateFPS() {
 
@@ -107,6 +109,7 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight) {
     loadImage("speechbubble");
     loadImage("speech_water");
     loadImage("speech_carrot");
+    loadImage("speech_burger");
 }
 
 function loadImage(name) {
@@ -286,7 +289,7 @@ function evaluateFood() {
     water += (categoryName == "drinks") + (foodName == "water");
     vegetables += (categoryName == "vegetables");
     fruits += (categoryName == "fruits");
-	
+
 	if(sugar - food.sugar > recommendedSugar && sugar > recommendedSugar && food.sugar > 0) {
 		setSugarShaking();	
 	}
@@ -297,7 +300,11 @@ function evaluateFood() {
 	
     calculateFatness();
 
-    if ((isThirsty() || needsVegetables()) && energy > recommendedEnergy / 2) {
+    if (foodName != "burger") {
+        consecutiveBurgerAmount = 0;
+    } else consecutiveBurgerAmount += 1;
+
+    if ((isSickOfBurgers() || isThirsty() || needsVegetables()) && energy > recommendedEnergy / 2) {
         activateSpeechBubble();
     } else {
         deactivateSpeechBubble();
@@ -633,6 +640,10 @@ function updateExcitement() {
 
 }
 
+function isSickOfBurgers() {
+    return consecutiveBurgerAmount >= 2;
+}
+
 function isThirsty() {
     return water < recommendedWater / 4;
 }
@@ -643,7 +654,8 @@ function needsVegetables() {
 }
 
 function selectSpeechBubbleTexture() {
-    if (isThirsty()) speakTexture = images["speech_water"];
+    if (isSickOfBurgers()) speakTexture = images["speech_burger"];
+    else if (isThirsty()) speakTexture = images["speech_water"];
     else speakTexture = images["speech_carrot"];
 
 }
